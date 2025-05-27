@@ -47,7 +47,13 @@ const CategoryItems = ({ title, onPressed }: CategoryItemsProps) => {
         contentContainerStyle={styles.scrollContainer}
       >
         {items.map(({ id, title, date, image }) => (
-          <VideoItem key={id} title={title} date={date} image={image} />
+          <VideoItem
+            key={id}
+            title={title}
+            date={date}
+            image={image}
+            videoId={"gggg"}
+          />
         ))}
       </ScrollView>
     </View>

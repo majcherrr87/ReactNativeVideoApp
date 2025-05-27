@@ -1,4 +1,5 @@
 import { mainColor } from "@/constants/Colors";
+import { router } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 type VideoItemProps = {
@@ -7,6 +8,7 @@ type VideoItemProps = {
   image: any; // możemy później zamienić na bardziej specificzny typ
   bigSize?: boolean;
   channelName?: string;
+  videoId: string; // Add videoId prop
 };
 
 const VideoItem = ({
@@ -15,9 +17,10 @@ const VideoItem = ({
   image,
   bigSize,
   channelName,
+  videoId,
 }: VideoItemProps) => {
   const handlePress = () => {
-    // handle press
+    router.push(`/video/${videoId}`);
   };
 
   return (

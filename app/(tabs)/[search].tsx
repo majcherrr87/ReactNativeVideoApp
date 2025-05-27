@@ -15,31 +15,28 @@ export default function DynamicSearchScreen() {
       <SearchHeader searchQuery={category} />
       <ScrollView>
         <VideoItem
-          title={
-            "React Native Basics - Getting Started with React Native Development "
-          }
-          date={"2024-02-20"}
+          videoId="xyz123"
+          title="Video Title"
+          date="2024-02-20"
           image={image}
           bigSize
-          channelName={"React Native Channel"}
+          channelName="React Native Channel"
         />
         <VideoItem
-          title={
-            "React Native Basics - Getting Started with React Native Development "
-          }
-          date={"2024-02-20"}
+          videoId="xyz123"
+          title="Video Title"
+          date="2024-02-20"
           image={image}
           bigSize
-          channelName={"React Native Channel"}
+          channelName="React Native Channel"
         />
         <VideoItem
-          title={
-            "React Native Basics - Getting Started with React Native Development "
-          }
-          date={"2024-02-20"}
+          videoId="xyz123"
+          title="Video Title"
+          date="2024-02-20"
           image={image}
           bigSize
-          channelName={"React Native Channel"}
+          channelName="React Native Channel"
         />
       </ScrollView>
     </View>
