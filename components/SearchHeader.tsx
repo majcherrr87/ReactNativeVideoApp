@@ -1,4 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import SortModal, { SortOption, sortOptions } from "./SortModal";
 
 type SearchHeaderProps = {
   resultsCount?: number;
@@ -6,21 +8,33 @@ type SearchHeaderProps = {
 };
 
 const SearchHeader = ({ resultsCount = 0, searchQuery }: SearchHeaderProps) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedSort, setSelectedSort] = useState<SortOption>("popular");
+
   return (
     <>
       <View style={styles.results}>
-        <Text style={styles.resultsText}>{resultsCount} results found for: </Text>
+        <Text style={styles.resultsText}>
+          {resultsCount} results found for:{" "}
+        </Text>
         <Text style={styles.value}>&quot;{searchQuery}&quot;</Text>
       </View>
-      <View style={styles.sort}>
+      <Pressable style={styles.sort} onPress={() => setModalVisible(true)}>
         <Text style={styles.sortText}>Sort by: </Text>
-        <Text style={styles.sortValue}>Most popular</Text>
-      </View>
+        <Text style={styles.sortValue}>
+          {sortOptions.find((opt) => opt.id === selectedSort)?.label}
+        </Text>
+      </Pressable>
+
+      <SortModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        selectedSort={selectedSort}
+        onSelectSort={setSelectedSort}
+      />
     </>
   );
 };
-
-export default SearchHeader;
 
 const styles = StyleSheet.create({
   results: {
@@ -58,3 +72,5 @@ const styles = StyleSheet.create({
     letterSpacing: 0.16,
   },
 });
+
+export default SearchHeader;
