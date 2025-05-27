@@ -1,16 +1,26 @@
 import CategoryItems from "@/components/CategoryItems";
 import Search from "@/components/Search";
+import { router } from "expo-router";
 import { ScrollView, StyleSheet, View } from "react-native";
 
 export default function HomeScreen() {
+  const CATEGORIES = ["React Native", "React", "TypeScript", "JavaScript"];
+
   return (
     <View style={styles.container}>
-      <Search />
+      <Search seatingsIcon />
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <CategoryItems title="React Native" />
-        <CategoryItems title="React " />
-        <CategoryItems title="TypeSctipt" />
-        <CategoryItems title="JavaSctipt" />
+        {CATEGORIES.map((category) => (
+          <CategoryItems
+            key={category}
+            title={category}
+            onPressed={() =>
+              router.push(
+                `/(tabs)/[search]?category=${encodeURIComponent(category)}`
+              )
+            }
+          />
+        ))}
       </ScrollView>
     </View>
   );
@@ -21,6 +31,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollViewContent: {
-    paddingBottom: 100,
+    // paddingBottom: 100,
   },
 });

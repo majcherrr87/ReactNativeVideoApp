@@ -4,7 +4,11 @@ import { mainColor } from "@/constants/Colors";
 import React from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 
-const Search = () => {
+type SearchProps = {
+  seatingsIcon?: boolean;
+};
+
+const Search = ({ seatingsIcon }: SearchProps) => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.searchContainer}>
@@ -15,12 +19,14 @@ const Search = () => {
           placeholderTextColor="#2B2D4299"
         />
       </View>
-      <SettingsIcon
-        style={styles.settingsIcon}
-        width={32}
-        height={32}
-        color={mainColor}
-      />
+      {seatingsIcon && (
+        <SettingsIcon
+          style={styles.settingsIcon}
+          width={32}
+          height={32}
+          color={mainColor}
+        />
+      )}
     </View>
   );
 };

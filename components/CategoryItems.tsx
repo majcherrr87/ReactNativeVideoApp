@@ -4,6 +4,7 @@ import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 type CategoryItemsProps = {
   title: string;
+  onPressed?: () => void; // Make it optional with ?
 };
 
 const items = [
@@ -30,12 +31,14 @@ const items = [
   },
 ];
 
-const CategoryItems = ({ title }: CategoryItemsProps) => {
+const CategoryItems = ({ title, onPressed }: CategoryItemsProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.containerTitle}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.showMore}>show more</Text>
+        <Text style={styles.showMore} onPress={onPressed}>
+          show more
+        </Text>
       </View>
       <ScrollView
         horizontal
