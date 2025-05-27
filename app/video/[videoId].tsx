@@ -1,5 +1,6 @@
 import Avater from "@/components/Avater";
 import Description from "@/components/Description";
+import Statistics from "@/components/Statistics";
 import { useLocalSearchParams } from "expo-router";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 
@@ -24,6 +25,7 @@ export default function VideoDetailsScreen() {
         </Text>
         <Avater channelName="Channel name" />
         <Description />
+        <Statistics />
       </View>
     </View>
   );
