@@ -1,6 +1,7 @@
 import { mainColor } from "@/constants/Colors";
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import VideoItem from "./VideoItem";
 
 type CategoryItemsProps = {
   title: string;
@@ -46,13 +47,7 @@ const CategoryItems = ({ title, onPressed }: CategoryItemsProps) => {
         contentContainerStyle={styles.scrollContainer}
       >
         {items.map(({ id, title, date, image }) => (
-          <View key={id} style={styles.itemContainer}>
-            <Image source={image} style={styles.thumbnail} />
-            <Text style={styles.itemTitle} numberOfLines={2}>
-              {title}
-            </Text>
-            <Text style={styles.date}>{date}</Text>
-          </View>
+          <VideoItem key={id} title={title} date={date} image={image} />
         ))}
       </ScrollView>
     </View>
