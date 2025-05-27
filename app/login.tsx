@@ -12,11 +12,11 @@ const Login = () => {
     <View style={[styles.container, { backgroundColor: theme.background }]}>
       <Image source={logo} style={styles.logo} />
       <Image source={appIcon} style={styles.appIcon} />
-      <View style={styles.main}>
+      <View style={styles.footer}>
         <Text style={styles.text}>
           Welcome to the best YouTube-based learning application.
         </Text>
-        <ThemedButton onPress={() => router.push("/explore")}>
+        <ThemedButton onPress={() => router.push("/")}>
           Log in as guest
         </ThemedButton>
         <Text style={styles.termsAndPrivacyText}>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     height: 150,
     resizeMode: "contain",
   },
-  main: {
+  footer: {
     width: "90%",
     alignItems: "center",
     gap: 20,

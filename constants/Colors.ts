@@ -11,8 +11,8 @@ export const Colors = {
     text: "#11181C",
     background: "#8D99AE",
     main: mainColor,
-    icon: "#687076",
-    tabIconDefault: "#687076",
+    icon: mainColor,
+    tabIconDefault: "#fff",
     tabIconSelected: mainColor,
   },
   dark: {
