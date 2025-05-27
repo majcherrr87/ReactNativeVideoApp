@@ -11,15 +11,18 @@ import { mainColor } from "../constants/Colors";
 type ThemedButtonProps = PressableProps & {
   children?: React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  onPress?: () => void;
 };
 
 const ThemedButton: React.FC<ThemedButtonProps> = ({
   style,
   children,
+  onPress,
   ...props
 }) => {
   return (
     <Pressable
+      onPress={onPress}
       style={({ pressed }) => [styles.btn, pressed && styles.pressed, style]}
       {...props}
     >
@@ -43,7 +46,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   pressed: {
-    opacity: 0.5,
+    opacity: 0.8,
   },
   text: {
     color: "#fff",

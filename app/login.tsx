@@ -1,5 +1,6 @@
 import ThemedButton from "@/components/ThemedButton";
 import { Colors, mainColor } from "@/constants/Colors";
+import { router } from "expo-router";
 import { Image, StyleSheet, Text, useColorScheme, View } from "react-native";
 import appIcon from "../assets/images/app-icon.png"; // Adjust the path as necessary
 import logo from "../assets/images/logo.png"; // Adjust the path as necessary
@@ -9,13 +10,15 @@ const Login = () => {
   const theme = Colors[colorScheme];
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Image source={logo} />;
-      <Image source={appIcon} />;
+      <Image source={logo} style={styles.logo} />
+      <Image source={appIcon} style={styles.appIcon} />
       <View style={styles.main}>
         <Text style={styles.text}>
           Welcome to the best YouTube-based learning application.
         </Text>
-        <ThemedButton>Log in as guest</ThemedButton>
+        <ThemedButton onPress={() => router.push("/explore")}>
+          Log in as guest
+        </ThemedButton>
         <Text style={styles.termsAndPrivacyText}>
           {`By continuing you agree with \n`}
           <Text
@@ -25,8 +28,8 @@ const Login = () => {
             }}
           >
             Terms and Conditions
-          </Text>{" "}
-          and{" "}
+          </Text>
+          <Text> and </Text>
           <Text
             style={styles.linkText}
             onPress={() => {
@@ -48,6 +51,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-around",
+  },
+  logo: {
+    width: "70%",
+    height: "20%",
+    resizeMode: "contain",
+  },
+  appIcon: {
+    width: 150,
+    height: 150,
+    resizeMode: "contain",
   },
   main: {
     width: "90%",
