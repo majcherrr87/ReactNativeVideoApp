@@ -4,8 +4,7 @@ import { Platform } from "react-native";
 
 import HomeIcon from "@/assets/icons/home-icon.svg";
 import SearchIcon from "@/assets/icons/search-icon.svg";
-import { HapticTab } from "@/components/HapticTab";
-import TabBarBackground from "@/components/ui/TabBarBackground";
+
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -18,8 +17,6 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme].main,
         tabBarInactiveTintColor: Colors[colorScheme].tabIconDefault,
         headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
         tabBarLabelStyle: {
           fontSize: 16,
           fontWeight: "400",

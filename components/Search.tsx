@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingRight: 16,
     marginTop: 32,
+    marginBottom: 32,
   },
   searchContainer: {
     flex: 1,

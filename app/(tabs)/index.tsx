@@ -1,17 +1,26 @@
+import CategoryItems from "@/components/CategoryItems";
 import Search from "@/components/Search";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <View>
+    <View style={styles.container}>
       <Search />
-      <ScrollView>
-        <View></View>
-        <Text>Content 1</Text>
-        <Text>Content 2</Text>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <CategoryItems title="React Native" />
+        <CategoryItems title="React " />
+        <CategoryItems title="TypeSctipt" />
+        <CategoryItems title="JavaSctipt" />
       </ScrollView>
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scrollViewContent: {
+    paddingBottom: 100,
+  },
+});
