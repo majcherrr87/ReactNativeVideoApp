@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 16,
+    paddingVertical: 16,
   },
   avatarContainer: {
     width: 40,
