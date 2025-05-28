@@ -4,7 +4,12 @@ import { mainColor } from "@/constants/Colors";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const Statistics = () => {
+type StatisticsProps = {
+  views: number;
+  likes: number;
+};
+
+const Statistics = ({ likes, views }: StatisticsProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Statistics</Text>
@@ -12,13 +17,13 @@ const Statistics = () => {
         <TouchableOpacity style={styles.button}>
           <ViewIcon width={20} height={20} color="#fff" />
           <Text style={styles.buttonText}>
-            <Text style={styles.numberText}>25.3K</Text> views
+            <Text style={styles.numberText}>{views}</Text> views
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <LikeIcon width={20} height={20} color="#fff" />
           <Text style={styles.buttonText}>
-            <Text style={styles.numberText}>15.3K</Text> likes
+            <Text style={styles.numberText}>{likes}</Text> likes
           </Text>
         </TouchableOpacity>
       </View>

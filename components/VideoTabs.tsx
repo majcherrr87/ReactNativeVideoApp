@@ -3,10 +3,14 @@ import { StyleSheet, View } from "react-native";
 import Details from "./Details";
 import Notes from "./Notes";
 import TabButton from "./TabButton";
+import { YouTubeVideo } from "@/types/youtubeSearchType";
 
 type Tab = "details" | "notes";
+type VideoTabsProps = {
+  video: YouTubeVideo;
+};
 
-const VideoTabs = () => {
+const VideoTabs = ({ video }: VideoTabsProps) => {
   const [activeTab, setActiveTab] = useState<Tab>("details");
 
   return (
@@ -25,7 +29,7 @@ const VideoTabs = () => {
       </View>
 
       <View style={styles.content}>
-        {activeTab === "details" ? <Details /> : <Notes />}
+        {activeTab === "details" ? <Details video={video} /> : <Notes />}
       </View>
     </View>
   );

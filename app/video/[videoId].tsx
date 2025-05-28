@@ -1,29 +1,58 @@
 import Avater from "@/components/Avater";
 import VideoTabs from "@/components/VideoTabs";
+import { mainColor } from "@/constants/Colors";
+import { useYouTubeVideo } from "@/hooks/useYouTubeVideo";
 import { useLocalSearchParams } from "expo-router";
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export default function VideoDetailsScreen() {
   const { videoId } = useLocalSearchParams<{ videoId: string }>();
   const { width } = Dimensions.get("window");
+  const { video, loading, error } = useYouTubeVideo(videoId);
 
-  const videoData = {
-    title: "React Native Tutorial - Building a Mobile App from Scratch",
-    thumbnail: require("@/assets/images/fotoExample.png"),
-  };
+  if (loading) {
+    return (
+      <View style={[styles.container, styles.centered]}>
+        <ActivityIndicator size="large" color={mainColor} />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={[styles.container, styles.centered]}>
+        <Text style={styles.errorText}>{error}</Text>
+      </View>
+    );
+  }
+
+  if (!video) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>
       <Image
-        source={videoData.thumbnail}
-        style={[styles.thumbnail, { width: width }]}
+        source={
+          typeof video.snippet.thumbnails.high.url === "string"
+            ? { uri: video.snippet.thumbnails.high.url }
+            : video.snippet.thumbnails.high.url
+        }
+        style={[styles.thumbnail, { width }]}
       />
       <View style={styles.content}>
-        <Text style={styles.title} numberOfLines={1}>
-          {videoData.title}
+        <Text style={styles.title} numberOfLines={2}>
+          {video.snippet.title}
         </Text>
-        <Avater channelName="Channel name" />
-        <VideoTabs />
+        <Avater channelName={video.snippet.channelTitle} />
+        <VideoTabs video={video} />
       </View>
     </View>
   );
@@ -47,5 +76,14 @@ const styles = StyleSheet.create({
     letterSpacing: 0.16,
     color: "#000",
     flexWrap: "wrap", // Allow text to wrap
+  },
+  centered: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorText: {
+    color: "red",
+    textAlign: "center",
+    padding: 16,
   },
 });
