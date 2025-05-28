@@ -65,7 +65,7 @@ const CategoryItems = ({
             key={item.id.videoId}
             title={item.snippet.title}
             date={item.snippet.publishedAt}
-            image={{ uri: item.snippet.thumbnails.medium.url }}
+            image={item.snippet.thumbnails.medium.url} // Zmieniono przekazywanie image
             videoId={item.id.videoId}
           />
         ))}

@@ -1,43 +1,12 @@
+import {
+  UseYouTubeSearchOptions,
+  UseYouTubeSearchResult,
+  YouTubeApiResponse,
+  YouTubeVideo,
+} from "@/types/youtubeSearchType";
 import { useCallback, useEffect, useState } from "react";
 import { BACKEND_BASE_URL } from "../constants/Api";
-
-interface YouTubeVideo {
-  id: {
-    videoId: string;
-  };
-  snippet: {
-    title: string;
-    channelTitle: string;
-    thumbnails: {
-      medium: {
-        url: string;
-      };
-      high: {
-        url: string;
-      };
-    };
-    publishedAt: string;
-  };
-}
-
-interface YouTubeApiResponse {
-  items: YouTubeVideo[];
-  nextPageToken?: string;
-  error?: string;
-}
-
-interface UseYouTubeSearchOptions {
-  initialQuery?: string;
-  maxResults?: number;
-  enabled?: boolean;
-}
-
-interface UseYouTubeSearchResult {
-  videos: YouTubeVideo[];
-  loading: boolean;
-  error: string | null;
-  fetchVideos: (query: string, resultsCount?: number) => Promise<void>;
-}
+import { mockYouTubeVideos } from "../mockData/youtubeMockData";
 
 const useYouTubeSearch = (
   options?: UseYouTubeSearchOptions
@@ -47,6 +16,12 @@ const useYouTubeSearch = (
   const [videos, setVideos] = useState<YouTubeVideo[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [isUsingMockData, setIsUsingMockData] = useState<boolean>(false);
+
+  const loadMockData = useCallback((count: number) => {
+    setVideos(mockYouTubeVideos.slice(0, count));
+    setIsUsingMockData(true);
+  }, []);
 
   const fetchVideos = useCallback(
     async (query: string, resultsCount?: number) => {
@@ -58,6 +33,8 @@ const useYouTubeSearch = (
 
       setLoading(true);
       setError(null);
+      setIsUsingMockData(false);
+
       try {
         const actualMaxResults = resultsCount || maxResults;
         const response = await fetch(
@@ -68,22 +45,23 @@ const useYouTubeSearch = (
         const data: YouTubeApiResponse = await response.json();
 
         if (!response.ok) {
-          const errorMessage =
-            data.error ||
-            "Wystąpił nieznany błąd podczas pobierania danych z backendu.";
-          throw new Error(errorMessage);
+          throw new Error("API Error");
         }
 
-        setVideos(data.items || []);
-      } catch (err: any) {
-        console.error("Błąd w useYouTubeSearch:", err);
-        setError(err.message || "Wystąpił błąd podczas wyszukiwania filmów.");
-        setVideos([]);
+        if (!data.items?.length) {
+          loadMockData(actualMaxResults);
+          return;
+        }
+
+        setVideos(data.items);
+      } catch (err) {
+        console.warn("Używam danych mockowych z powodu błędu API");
+        loadMockData(maxResults);
       } finally {
         setLoading(false);
       }
     },
-    [maxResults]
+    [maxResults, loadMockData]
   );
 
   useEffect(() => {
@@ -92,7 +70,7 @@ const useYouTubeSearch = (
     }
   }, [enabled, initialQuery, fetchVideos]);
 
-  return { videos, loading, error, fetchVideos };
+  return { videos, loading, error, fetchVideos, isUsingMockData };
 };
 
 export default useYouTubeSearch;

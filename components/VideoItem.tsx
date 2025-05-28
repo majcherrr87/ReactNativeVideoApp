@@ -13,7 +13,7 @@ import {
 type VideoItemProps = {
   title: string;
   date: string;
-  image: ImageSourcePropType;
+  image: ImageSourcePropType | string;
   videoId: string;
   channelName?: string;
   bigSize?: boolean;
@@ -37,8 +37,9 @@ const VideoItem = ({
       onPress={handlePress}
     >
       <Image
-        source={image}
+        source={typeof image === "string" ? { uri: image } : image}
         style={[styles.thumbnail, bigSize && styles.thumbnailBig]}
+        resizeMode="cover"
       />
       <View style={styles.content}>
         {bigSize && channelName && (

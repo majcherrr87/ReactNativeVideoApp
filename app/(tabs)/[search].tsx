@@ -47,7 +47,7 @@ export default function DynamicSearchScreen() {
             videoId={video.id.videoId}
             title={video.snippet.title}
             date={video.snippet.publishedAt}
-            image={{ uri: video.snippet.thumbnails.high.url }}
+            image={video.snippet.thumbnails.high.url}
             bigSize
             channelName={video.snippet.channelTitle}
           />
