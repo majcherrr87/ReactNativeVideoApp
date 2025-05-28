@@ -1,7 +1,8 @@
 import SearchIcon from "@/assets/icons/search-icon.svg";
 import SettingsIcon from "@/assets/icons/settings-icon.svg";
 import { mainColor } from "@/constants/Colors";
-import React from "react";
+import { useRouter } from "expo-router";
+import React, { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 
 type SearchProps = {
@@ -9,6 +10,18 @@ type SearchProps = {
 };
 
 const Search = ({ seatingsIcon }: SearchProps) => {
+  const [searchText, setSearchText] = useState("");
+  const router = useRouter();
+
+  const handleSubmit = () => {
+    if (searchText.trim()) {
+      router.push(
+        `/(tabs)/[search]?category=${encodeURIComponent(searchText)}`
+      );
+      setSearchText("");
+    }
+  };
+
   return (
     <View style={styles.headerContainer}>
       <View style={styles.searchContainer}>
@@ -17,6 +30,10 @@ const Search = ({ seatingsIcon }: SearchProps) => {
           style={styles.searchInput}
           placeholder="Search videos"
           placeholderTextColor="#2B2D4299"
+          value={searchText}
+          onChangeText={setSearchText}
+          onSubmitEditing={handleSubmit}
+          returnKeyType="search"
         />
       </View>
       {seatingsIcon && (

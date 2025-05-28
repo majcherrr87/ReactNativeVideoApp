@@ -13,21 +13,28 @@ const items = [
     id: "1",
     image: require("@/assets/images/fotoExample.png"),
     title:
-      "React Native Basics - Getting Started with React Native Development and Building Your First App",
+      "1 React Native Basics - Getting Started with React Native Development and Building Your First App",
     date: "2024-02-20",
   },
   {
     id: "2",
     image: require("@/assets/images/fotoExample.png"),
     title:
-      "React Native Basics - Getting Started with React Native Development and Building Your First App",
+      "2 React Native Basics - Getting Started with React Native Development and Building Your First App",
     date: "2024-02-20",
   },
   {
     id: "3",
     image: require("@/assets/images/fotoExample.png"),
     title:
-      "React Native Basics - Getting Started with React Native Development and Building Your First App",
+      "3 React Native Basics - Getting Started with React Native Development and Building Your First App",
+    date: "2024-02-20",
+  },
+  {
+    id: "4",
+    image: require("@/assets/images/fotoExample.png"),
+    title:
+      "4 React Native Basics - Getting Started with React Native Development and Building Your First App",
     date: "2024-02-20",
   },
 ];

@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
 const Notes = () => {
   const notes = [
     {
