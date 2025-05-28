@@ -1,14 +1,22 @@
 import { mainColor } from "@/constants/Colors";
+import { formatDate } from "@/scripts/formatDate";
 import { router } from "expo-router";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  ImageSourcePropType,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 type VideoItemProps = {
   title: string;
   date: string;
-  image: any; // możemy później zamienić na bardziej specificzny typ
-  bigSize?: boolean;
+  image: ImageSourcePropType;
+  videoId: string;
   channelName?: string;
-  videoId: string; // Add videoId prop
+  bigSize?: boolean;
 };
 
 const VideoItem = ({
@@ -42,7 +50,7 @@ const VideoItem = ({
         >
           {title}
         </Text>
-        <Text style={styles.date}>{date}</Text>
+        <Text style={styles.date}>{formatDate(date)}</Text>
       </View>
     </Pressable>
   );

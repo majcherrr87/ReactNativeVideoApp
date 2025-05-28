@@ -62,11 +62,11 @@ const CategoryItems = ({
 
         {videos.map((item) => (
           <VideoItem
-            key={item.id.videoId} // Użyj videoId jako klucza
+            key={item.id.videoId}
             title={item.snippet.title}
-            date={item.snippet.publishedAt} // Użyj daty publikacji z API
-            image={{ uri: item.snippet.thumbnails.medium.url }} // Użyj URL miniatury
-            videoId={item.id.videoId} // Przekaż videoId
+            date={item.snippet.publishedAt}
+            image={{ uri: item.snippet.thumbnails.medium.url }}
+            videoId={item.id.videoId}
           />
         ))}
       </ScrollView>

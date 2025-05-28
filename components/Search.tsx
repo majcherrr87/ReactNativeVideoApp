@@ -16,7 +16,7 @@ const Search = ({ seatingsIcon }: SearchProps) => {
   const handleSubmit = () => {
     if (searchText.trim()) {
       router.push(
-        `/(tabs)/[search]?category=${encodeURIComponent(searchText)}`
+        `/(tabs)/[search]?searchQuery=${encodeURIComponent(searchText)}`
       );
       setSearchText("");
     }

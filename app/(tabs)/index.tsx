@@ -16,7 +16,7 @@ export default function HomeScreen() {
             title={category}
             onPressed={() =>
               router.push(
-                `/(tabs)/[search]?category=${encodeURIComponent(category)}`
+                `/(tabs)/[search]?searchQuery=${encodeURIComponent(category)}`
               )
             }
             searchQuery={category}

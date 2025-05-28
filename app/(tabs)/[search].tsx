@@ -1,43 +1,57 @@
 import Search from "@/components/Search";
 import SearchHeader from "@/components/SearchHeader";
 import VideoItem from "@/components/VideoItem";
+import { mainColor } from "@/constants/Colors";
+import useYouTubeSearch from "@/hooks/useYouTubeSearch";
 import { useLocalSearchParams } from "expo-router";
-import { ScrollView, StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export default function DynamicSearchScreen() {
-  const { category } = useLocalSearchParams<{ category: string }>();
+  const { searchQuery } = useLocalSearchParams<{ searchQuery: string }>();
+  const { videos, loading, error } = useYouTubeSearch({
+    initialQuery: searchQuery,
+    maxResults: 10,
+    enabled: true,
+  });
 
-  const image = require("@/assets/images/fotoExample.png");
+  if (loading) {
+    return (
+      <View style={[styles.container, styles.centered]}>
+        <ActivityIndicator size="large" color={mainColor} />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={[styles.container, styles.centered]}>
+        <Text style={styles.errorText}>Error loading videos: {error}</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <Search />
-      <SearchHeader searchQuery={category} />
+      <SearchHeader searchQuery={searchQuery} />
       <ScrollView>
-        <VideoItem
-          videoId="xyz123"
-          title="Video Title"
-          date="2024-02-20"
-          image={image}
-          bigSize
-          channelName="React Native Channel"
-        />
-        <VideoItem
-          videoId="xyz123"
-          title="Video Title"
-          date="2024-02-20"
-          image={image}
-          bigSize
-          channelName="React Native Channel"
-        />
-        <VideoItem
-          videoId="xyz123"
-          title="Video Title"
-          date="2024-02-20"
-          image={image}
-          bigSize
-          channelName="React Native Channel"
-        />
+        {videos.map((video) => (
+          <VideoItem
+            key={video.id.videoId}
+            videoId={video.id.videoId}
+            title={video.snippet.title}
+            date={video.snippet.publishedAt}
+            image={{ uri: video.snippet.thumbnails.high.url }}
+            bigSize
+            channelName={video.snippet.channelTitle}
+          />
+        ))}
       </ScrollView>
     </View>
   );
@@ -46,5 +60,14 @@ export default function DynamicSearchScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  centered: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorText: {
+    color: "red",
+    textAlign: "center",
+    padding: 16,
   },
 });
