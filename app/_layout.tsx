@@ -26,7 +26,7 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="login" />
-        <Stack.Screen name="video" />
+        <Stack.Screen name="video/[videoId]" />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
