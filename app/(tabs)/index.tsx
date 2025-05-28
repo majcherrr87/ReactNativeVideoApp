@@ -19,6 +19,7 @@ export default function HomeScreen() {
                 `/(tabs)/[search]?category=${encodeURIComponent(category)}`
               )
             }
+            searchQuery={category}
           />
         ))}
       </ScrollView>

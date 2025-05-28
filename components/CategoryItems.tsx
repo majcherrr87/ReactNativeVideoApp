@@ -1,65 +1,72 @@
 import { mainColor } from "@/constants/Colors";
-import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import useYouTubeSearch from "../hooks/useYouTubeSearch";
 import VideoItem from "./VideoItem";
 
 type CategoryItemsProps = {
   title: string;
-  onPressed?: () => void; // Make it optional with ?
+  searchQuery: string;
+  onPressed?: () => void;
 };
 
-const items = [
-  {
-    id: "1",
-    image: require("@/assets/images/fotoExample.png"),
-    title:
-      "1 React Native Basics - Getting Started with React Native Development and Building Your First App",
-    date: "2024-02-20",
-  },
-  {
-    id: "2",
-    image: require("@/assets/images/fotoExample.png"),
-    title:
-      "2 React Native Basics - Getting Started with React Native Development and Building Your First App",
-    date: "2024-02-20",
-  },
-  {
-    id: "3",
-    image: require("@/assets/images/fotoExample.png"),
-    title:
-      "3 React Native Basics - Getting Started with React Native Development and Building Your First App",
-    date: "2024-02-20",
-  },
-  {
-    id: "4",
-    image: require("@/assets/images/fotoExample.png"),
-    title:
-      "4 React Native Basics - Getting Started with React Native Development and Building Your First App",
-    date: "2024-02-20",
-  },
-];
+const CategoryItems = ({
+  title,
+  searchQuery,
+  onPressed,
+}: CategoryItemsProps) => {
+  const { videos, loading, error, fetchVideos } = useYouTubeSearch({
+    initialQuery: searchQuery,
+    maxResults: 5,
+    enabled: true,
+  });
 
-const CategoryItems = ({ title, onPressed }: CategoryItemsProps) => {
+  useEffect(() => {
+    fetchVideos(searchQuery);
+  }, [searchQuery, fetchVideos]);
+
   return (
     <View style={styles.container}>
       <View style={styles.containerTitle}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.showMore} onPress={onPressed}>
-          show more
-        </Text>
+        {onPressed && (
+          <Text style={styles.showMore} onPress={onPressed}>
+            show more
+          </Text>
+        )}
       </View>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContainer}
       >
-        {items.map(({ id, title, date, image }) => (
+        {loading && (
+          <ActivityIndicator
+            size="small"
+            color={mainColor}
+            style={styles.loader}
+          />
+        )}
+        {error && (
+          <Text style={styles.errorText}>Error loading videos: {error}</Text>
+        )}
+        {!loading && !error && videos.length === 0 && (
+          <Text style={styles.noResultsText}>No videos to display.</Text>
+        )}
+
+        {videos.map((item) => (
           <VideoItem
-            key={id}
-            title={title}
-            date={date}
-            image={image}
-            videoId={"gggg"}
+            key={item.id.videoId} // Użyj videoId jako klucza
+            title={item.snippet.title}
+            date={item.snippet.publishedAt} // Użyj daty publikacji z API
+            image={{ uri: item.snippet.thumbnails.medium.url }} // Użyj URL miniatury
+            videoId={item.id.videoId} // Przekaż videoId
           />
         ))}
       </ScrollView>
@@ -101,28 +108,23 @@ const styles = StyleSheet.create({
     gap: 16,
     marginBottom: 16,
   },
-  itemContainer: {
-    width: 200,
-    marginRight: 16,
+  loader: {
+    alignSelf: "center",
+    marginVertical: 10,
+    minWidth: 100, // Zapewnia, że ładowarka ma miejsce
   },
-  thumbnail: {
-    width: "100%",
-    height: 120,
-    borderRadius: 8,
-    marginBottom: 8,
+  errorText: {
+    color: "red",
+    textAlign: "center",
+    marginVertical: 10,
+    minWidth: 200, // Zapewnia, że komunikat o błędzie ma miejsce
   },
-  itemTitle: {
-    fontSize: 12,
-    fontWeight: "500",
-    lineHeight: 12,
-    letterSpacing: 0.16,
-    marginBottom: 4,
+  noResultsText: {
+    textAlign: "center",
+    marginTop: 10,
+    color: "#888",
+    minWidth: 200, // Zapewnia, że komunikat ma miejsce
   },
-  date: {
-    fontSize: 12,
-    fontWeight: "400",
-    color: mainColor,
-    lineHeight: 24,
-    textAlign: "right",
-  },
+  // Usuń itemContainer, thumbnail, itemTitle, date jeśli są zdefiniowane w VideoItem.tsx
+  // i nie są używane bezpośrednio tutaj
 });
