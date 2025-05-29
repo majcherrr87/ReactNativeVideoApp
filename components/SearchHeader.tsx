@@ -5,11 +5,17 @@ import SortModal, { SortOption, sortOptions } from "./SortModal";
 type SearchHeaderProps = {
   resultsCount?: number;
   searchQuery: string;
+  selectedSort: SortOption;
+  onSelectSort: (sort: string) => void;
 };
 
-const SearchHeader = ({ resultsCount = 0, searchQuery }: SearchHeaderProps) => {
+const SearchHeader = ({
+  resultsCount = 0,
+  searchQuery,
+  selectedSort,
+  onSelectSort,
+}: SearchHeaderProps) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedSort, setSelectedSort] = useState<SortOption>("popular");
 
   return (
     <>
@@ -30,7 +36,7 @@ const SearchHeader = ({ resultsCount = 0, searchQuery }: SearchHeaderProps) => {
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         selectedSort={selectedSort}
-        onSelectSort={setSelectedSort}
+        onSelectSort={onSelectSort}
       />
     </>
   );

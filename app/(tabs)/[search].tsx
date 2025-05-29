@@ -1,9 +1,12 @@
 import Search from "@/components/Search";
 import SearchHeader from "@/components/SearchHeader";
+import { SortOption } from "@/components/SortModal";
 import VideoItem from "@/components/VideoItem";
 import { mainColor } from "@/constants/Colors";
 import useYouTubeSearch from "@/hooks/useYouTubeSearch";
+import { sortVideos } from "@/scripts/SortVideo";
 import { useLocalSearchParams } from "expo-router";
+import { useState } from "react";
 import {
   ActivityIndicator,
   ScrollView,
@@ -14,6 +17,7 @@ import {
 
 export default function DynamicSearchScreen() {
   const { searchQuery } = useLocalSearchParams<{ searchQuery: string }>();
+  const [selectedSort, setSelectedSort] = useState<SortOption>("popular");
   const { videos, loading, error } = useYouTubeSearch({
     initialQuery: searchQuery,
     maxResults: 10,
@@ -36,12 +40,19 @@ export default function DynamicSearchScreen() {
     );
   }
 
+  const SortVideo = sortVideos(videos, selectedSort);
+
   return (
     <View style={styles.container}>
       <Search />
-      <SearchHeader searchQuery={searchQuery} />
+      <SearchHeader
+        resultsCount={videos.length}
+        searchQuery={searchQuery}
+        selectedSort={selectedSort}
+        onSelectSort={(sort) => setSelectedSort(sort as SortOption)}
+      />
       <ScrollView>
-        {videos.map((video) => (
+        {SortVideo.map((video) => (
           <VideoItem
             key={video.id.videoId}
             videoId={video.id.videoId}
