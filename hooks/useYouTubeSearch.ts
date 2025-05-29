@@ -1,11 +1,9 @@
 import {
   UseYouTubeSearchOptions,
   UseYouTubeSearchResult,
-  YouTubeApiResponse,
   YouTubeVideo,
 } from "@/types/youtubeSearchType";
 import { useCallback, useEffect, useState } from "react";
-import { BACKEND_BASE_URL } from "../constants/Api";
 import { mockYouTubeVideos } from "../mockData/youtubeMockData";
 
 const useYouTubeSearch = (
@@ -21,6 +19,7 @@ const useYouTubeSearch = (
   const loadMockData = useCallback((count: number) => {
     setVideos(mockYouTubeVideos.slice(0, count));
     setIsUsingMockData(true);
+    setError(null); 
   }, []);
 
   const fetchVideos = useCallback(
@@ -32,34 +31,44 @@ const useYouTubeSearch = (
       }
 
       setLoading(true);
-      setError(null);
-      setIsUsingMockData(false);
+      setError(null); 
+      setIsUsingMockData(false); 
 
-      try {
-        const actualMaxResults = resultsCount || maxResults;
-        const response = await fetch(
-          `${BACKEND_BASE_URL}/api/Youtube?q=${encodeURIComponent(
-            query
-          )}&maxResults=${actualMaxResults}`
-        );
-        const data: YouTubeApiResponse = await response.json();
+      loadMockData(resultsCount || maxResults);
+      setLoading(false);
+      return; 
+      // --------------------------------------------------------
 
-        if (!response.ok) {
-          throw new Error("API Error");
-        }
+      // PONIŻSZY KOD BĘDZIE AKTYWNY, GDY SERVER ZACZNIE DZIAŁAĆ
+      // try {
+      //   const actualMaxResults = resultsCount || maxResults;
+      //   const response = await fetch(
+      //     `<span class="math-inline">\{BACKEND\_BASE\_URL\}/api/Youtube?q\=</span>{encodeURIComponent(
+      //       query
+      //     )}&maxResults=${actualMaxResults}`
+      //   );
+      //   const data: YouTubeApiResponse = await response.json();
 
-        if (!data.items?.length) {
-          loadMockData(actualMaxResults);
-          return;
-        }
+      //   if (!response.ok) {
+      //     const errorMessage =
+      //       data.error?.message || `API error: ${response.status}`;
+      //     throw new Error(errorMessage);
+      //   }
 
-        setVideos(data.items);
-      } catch (err) {
-        console.warn("Używam danych mockowych z powodu błędu API");
-        loadMockData(maxResults);
-      } finally {
-        setLoading(false);
-      }
+      //   if (!data.items?.length) {
+      //     console.warn("Brak wyników API, używam danych mockowych.");
+      //     loadMockData(actualMaxResults);
+      //     return;
+      //   }
+
+      //   setVideos(data.items);
+      // } catch (err: any) {
+      //   console.warn("Używam danych mockowych z powodu błędu API:", err.message);
+      //   setError(err.message || "Wystąpił nieznany błąd podczas pobierania wideo.");
+      //   loadMockData(maxResults);
+      // } finally {
+      //   setLoading(false);
+      // }
     },
     [maxResults, loadMockData]
   );

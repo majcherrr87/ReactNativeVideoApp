@@ -12,7 +12,10 @@ const Details = ({ video }: VideoTabsProps) => {
     <View>
       <Text style={styles.descriptionTitle}>Description</Text>
       <Text style={styles.descriptionText}>{video.snippet.description}</Text>
-      <Statistics views={video.snippet.views} likes={video.snippet.likes} />
+      <Statistics
+        views={video.snippet.views ?? 0}
+        likes={video.snippet.likes ?? 0}
+      />
     </View>
   );
 };

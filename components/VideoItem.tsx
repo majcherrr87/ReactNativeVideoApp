@@ -1,21 +1,18 @@
+import fallbackLocalImage from "@/assets/images/fotoExample.png";
 import { mainColor } from "@/constants/Colors";
 import { formatDate } from "@/scripts/formatDate";
 import { router } from "expo-router";
-import {
-  Image,
-  ImageSourcePropType,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 type VideoItemProps = {
   title: string;
   date: string;
-  image: ImageSourcePropType | string;
+  image: { uri: string };
   videoId: string;
+  videoTitle: string;
+  videoChannel: string;
   channelName?: string;
+  streamUrl?: string;
   bigSize?: boolean;
 };
 
@@ -31,15 +28,19 @@ const VideoItem = ({
     router.push(`/video/${videoId}`);
   };
 
+  const imageSource =
+    image && image.uri && typeof image.uri === "string" && image.uri.length > 0
+      ? { uri: image.uri }
+      : fallbackLocalImage;
+
   return (
     <Pressable
       style={[styles.container, bigSize && styles.containerBig]}
       onPress={handlePress}
     >
       <Image
-        source={typeof image === "string" ? { uri: image } : image}
+        source={fallbackLocalImage}
         style={[styles.thumbnail, bigSize && styles.thumbnailBig]}
-        resizeMode="cover"
       />
       <View style={styles.content}>
         {bigSize && channelName && (

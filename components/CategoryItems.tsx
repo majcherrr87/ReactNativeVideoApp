@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import useYouTubeSearch from "../hooks/useYouTubeSearch";
 import VideoItem from "./VideoItem";
+import { YouTubeVideo } from "../types/youtubeSearchType";
 
 type CategoryItemsProps = {
   title: string;
@@ -53,20 +54,23 @@ const CategoryItems = ({
             style={styles.loader}
           />
         )}
-        {error && (
-          <Text style={styles.errorText}>Error loading videos: {error}</Text>
+        {!loading && error && (
+          <Text style={styles.loader}>Błąd ładowania filmów: {error}</Text>
         )}
-        {!loading && !error && videos.length === 0 && (
-          <Text style={styles.noResultsText}>No videos to display.</Text>
+        {!loading && videos.length === 0 && !error && (
+          <Text style={styles.loader}>Brak wyników do wyświetlenia.</Text>
         )}
 
-        {videos.map((item) => (
+        {videos.map((item: YouTubeVideo) => (
           <VideoItem
             key={item.id.videoId}
             title={item.snippet.title}
             date={item.snippet.publishedAt}
-            image={item.snippet.thumbnails.medium.url} // Zmieniono przekazywanie image
+            image={{ uri: item.snippet.thumbnails.medium.url }}
             videoId={item.id.videoId}
+            videoTitle={item.snippet.title}
+            videoChannel={item.snippet.channelTitle}
+            streamUrl={item.streamUrl}
           />
         ))}
       </ScrollView>
@@ -111,20 +115,6 @@ const styles = StyleSheet.create({
   loader: {
     alignSelf: "center",
     marginVertical: 10,
-    minWidth: 100, // Zapewnia, że ładowarka ma miejsce
+    minWidth: 100,
   },
-  errorText: {
-    color: "red",
-    textAlign: "center",
-    marginVertical: 10,
-    minWidth: 200, // Zapewnia, że komunikat o błędzie ma miejsce
-  },
-  noResultsText: {
-    textAlign: "center",
-    marginTop: 10,
-    color: "#888",
-    minWidth: 200, // Zapewnia, że komunikat ma miejsce
-  },
-  // Usuń itemContainer, thumbnail, itemTitle, date jeśli są zdefiniowane w VideoItem.tsx
-  // i nie są używane bezpośrednio tutaj
 });

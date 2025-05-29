@@ -1,3 +1,4 @@
+import fallbackLocalImage from "@/assets/images/fotoExample.png";
 import Avater from "@/components/Avater";
 import VideoTabs from "@/components/VideoTabs";
 import { mainColor } from "@/constants/Colors";
@@ -40,11 +41,12 @@ export default function VideoDetailsScreen() {
   return (
     <View style={styles.container}>
       <Image
-        source={
-          typeof video.snippet.thumbnails.high.url === "string"
-            ? { uri: video.snippet.thumbnails.high.url }
-            : video.snippet.thumbnails.high.url
-        }
+        source={fallbackLocalImage}
+        // source={
+        //   typeof video.snippet.thumbnails.high.url === "string"
+        //     ? { uri: video.snippet.thumbnails.high.url }
+        //     : video.snippet.thumbnails.high.url
+        // }
         style={[styles.thumbnail, { width }]}
       />
       <View style={styles.content}>
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: 0.16,
     color: "#000",
-    flexWrap: "wrap", // Allow text to wrap
+    flexWrap: "wrap",
   },
   centered: {
     justifyContent: "center",

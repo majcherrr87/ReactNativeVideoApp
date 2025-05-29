@@ -21,14 +21,7 @@ const Login = () => {
         </ThemedButton>
         <Text style={styles.termsAndPrivacyText}>
           {`By continuing you agree with \n`}
-          <Text
-            style={styles.linkText}
-            onPress={() => {
-              /* handle terms click */
-            }}
-          >
-            Terms and Conditions
-          </Text>
+          <Text style={styles.linkText}>Terms and Conditions</Text>
           <Text> and </Text>
           <Text
             style={styles.linkText}
