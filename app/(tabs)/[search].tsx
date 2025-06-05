@@ -20,7 +20,7 @@ export default function DynamicSearchScreen() {
   const [selectedSort, setSelectedSort] = useState<SortOption>("popular");
   const { videos, loading, error } = useYouTubeSearch({
     initialQuery: searchQuery,
-    maxResults: 10,
+    maxResults: 50,
     enabled: true,
   });
 

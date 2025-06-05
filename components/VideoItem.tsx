@@ -39,7 +39,7 @@ const VideoItem = ({
       onPress={handlePress}
     >
       <Image
-        source={fallbackLocalImage}
+        source={imageSource}
         style={[styles.thumbnail, bigSize && styles.thumbnailBig]}
       />
       <View style={styles.content}>

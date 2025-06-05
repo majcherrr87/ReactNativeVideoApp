@@ -55,4 +55,11 @@ export interface YouTubeApiResponse {
     resultsPerPage: number;
   };
   items: YouTubeVideo[];
+  message?: string;
+  quotaExceeded?: boolean;
+  retryAfter?: string;
+  cacheAvailable?: boolean;
+  _fromCache?: boolean;
+  _quotaExceeded?: boolean;
+  _apiError?: string;
 }

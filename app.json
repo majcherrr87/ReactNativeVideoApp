@@ -48,6 +48,12 @@
         "asset": "./assets/fonts/Poppins-Bold.ttf",
         "family": "Poppins-Bold"
       }
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "78d38df0-6678-4571-9b84-fd886fe8b1a9"
+      }
+    }
   }
 }

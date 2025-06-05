@@ -8,8 +8,8 @@ import {
   View,
 } from "react-native";
 import useYouTubeSearch from "../hooks/useYouTubeSearch";
-import VideoItem from "./VideoItem";
 import { YouTubeVideo } from "../types/youtubeSearchType";
+import VideoItem from "./VideoItem";
 
 type CategoryItemsProps = {
   title: string;
@@ -24,7 +24,7 @@ const CategoryItems = ({
 }: CategoryItemsProps) => {
   const { videos, loading, error, fetchVideos } = useYouTubeSearch({
     initialQuery: searchQuery,
-    maxResults: 5,
+    maxResults: 30,
     enabled: true,
   });
 
