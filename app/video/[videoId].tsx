@@ -1,4 +1,3 @@
-import fallbackLocalImage from "@/assets/images/fotoExample.png";
 import Avater from "@/components/Avater";
 import VideoTabs from "@/components/VideoTabs";
 import { mainColor } from "@/constants/Colors";
@@ -41,12 +40,11 @@ export default function VideoDetailsScreen() {
   return (
     <View style={styles.container}>
       <Image
-        source={fallbackLocalImage}
-        // source={
-        //   typeof video.snippet.thumbnails.high.url === "string"
-        //     ? { uri: video.snippet.thumbnails.high.url }
-        //     : video.snippet.thumbnails.high.url
-        // }
+        source={
+          typeof video.snippet.thumbnails.high.url === "string"
+            ? { uri: video.snippet.thumbnails.high.url }
+            : video.snippet.thumbnails.high.url
+        }
         style={[styles.thumbnail, { width }]}
       />
       <View style={styles.content}>
@@ -89,3 +87,6 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 });
+// dodać avatar,
+//poprawić przewijanie,
+//dodać wyświetlanie video,
