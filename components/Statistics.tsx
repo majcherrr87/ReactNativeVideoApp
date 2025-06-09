@@ -5,8 +5,8 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type StatisticsProps = {
-  views: number;
-  likes: number;
+  views: string;
+  likes: string;
 };
 
 const Statistics = ({ likes, views }: StatisticsProps) => {
@@ -34,6 +34,7 @@ const Statistics = ({ likes, views }: StatisticsProps) => {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 16,
+    marginBottom: 16,
   },
   title: {
     fontSize: 10,

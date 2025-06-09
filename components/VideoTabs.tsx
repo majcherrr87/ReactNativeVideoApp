@@ -1,9 +1,9 @@
+import { YouTubeVideo } from "@/types/youtubeSearchType";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Details from "./Details";
 import Notes from "./Notes";
 import TabButton from "./TabButton";
-import { YouTubeVideo } from "@/types/youtubeSearchType";
 
 type Tab = "details" | "notes";
 type VideoTabsProps = {
@@ -37,6 +37,7 @@ const VideoTabs = ({ video }: VideoTabsProps) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     // padding: 16,
   },
   tabContainer: {
@@ -45,6 +46,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#C8C8C8",
   },
   content: {
+    flex: 1,
     paddingTop: 16,
   },
 });

@@ -16,7 +16,9 @@ import {
 } from "react-native";
 
 export default function DynamicSearchScreen() {
-  const { searchQuery } = useLocalSearchParams<{ searchQuery: string }>();
+  const { searchQuery = "React Native" } = useLocalSearchParams<{
+    searchQuery: string;
+  }>();
   const [selectedSort, setSelectedSort] = useState<SortOption>("popular");
   const { videos, loading, error } = useYouTubeSearch({
     initialQuery: searchQuery,

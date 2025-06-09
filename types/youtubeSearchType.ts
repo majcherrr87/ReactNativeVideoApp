@@ -42,6 +42,10 @@ export interface YouTubeVideo {
     likes?: number;
   };
   streamUrl?: string;
+  statistics?: {
+    viewCount: string;
+    likeCount: string;
+  };
 }
 
 export interface YouTubeApiResponse {

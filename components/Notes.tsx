@@ -40,7 +40,7 @@ const Notes = () => {
   ];
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <ScrollView
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
@@ -75,7 +75,7 @@ const Notes = () => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    maxHeight: 230,
+    flex: 1,
   },
   wrapper: {
     gap: 8,
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     color: mainColor,
     textAlign: "right",
   },
-  addNote: { marginBottom: 16 },
+  addNote: { marginBottom: 32 },
   button: {
     backgroundColor: mainColor,
     paddingVertical: 12,
