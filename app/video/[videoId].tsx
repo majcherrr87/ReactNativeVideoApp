@@ -1,6 +1,7 @@
 import Avater from "@/components/Avater";
 import VideoTabs from "@/components/VideoTabs";
 import { mainColor } from "@/constants/Colors";
+import { useYouTubeChannelAvatar } from "@/hooks/useYouTubeChannelAvatar";
 import { useYouTubeVideo } from "@/hooks/useYouTubeVideo";
 import { useLocalSearchParams } from "expo-router";
 import {
@@ -16,6 +17,7 @@ export default function VideoDetailsScreen() {
   const { videoId } = useLocalSearchParams<{ videoId: string }>();
   const { width } = Dimensions.get("window");
   const { video, loading, error } = useYouTubeVideo(videoId);
+  const { urlAvater } = useYouTubeChannelAvatar(video?.snippet.channelId);
 
   if (loading) {
     return (
@@ -51,7 +53,10 @@ export default function VideoDetailsScreen() {
         <Text style={styles.title} numberOfLines={2}>
           {video.snippet.title}
         </Text>
-        <Avater channelName={video.snippet.channelTitle} />
+        <Avater
+          channelName={video.snippet.channelTitle}
+          imageUrl={urlAvater ?? undefined}
+        />
         <VideoTabs video={video} />
       </View>
     </View>

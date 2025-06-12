@@ -1,5 +1,6 @@
 // src/hooks/useYouTubeVideo.ts
 
+import { BACKEND_BASE_URL } from "@/constants/Api";
 import { YouTubeApiResponse, YouTubeVideo } from "@/types/youtubeSearchType";
 import { useCallback, useEffect, useState } from "react";
 // Jeśli nie używasz już mocków, możesz zakomentować tę linię
@@ -7,9 +8,6 @@ import { useCallback, useEffect, useState } from "react";
 
 // === KONFIGURACJA API ===
 // WAŻNE: ZASTĄP TO SWOIM FAKTYCZNYM URL-em BACKENDU NA HEROKU
-const BACKEND_BASE_URL =
-  "https://backend-youtube-new-7708a19a053a.herokuapp.com";
-// =========================
 
 interface UseYouTubeVideoResult {
   video: YouTubeVideo | null;
@@ -41,22 +39,10 @@ export const useYouTubeVideo = (videoId?: string): UseYouTubeVideoResult => {
     setError(null);
 
     try {
-      console.log(
-        `[useYouTubeVideo] Rozpoczynam pobieranie szczegółów dla videoId: '${videoId}'`
-      );
-      console.log(
-        `[useYouTubeVideo] Celowy URL API: ${BACKEND_BASE_URL}/api/Youtube/video/${videoId}`
-      );
-
       const response = await fetch(
         `${BACKEND_BASE_URL}/api/Youtube/video/${videoId}`
       );
       const data: YouTubeApiResponse = await response.json();
-
-      console.log(
-        `[useYouTubeVideo] Odpowiedź z backendu (status): ${response.status}`
-      );
-      console.log(`[useYouTubeVideo] Odpowiedź z backendu (dane):`, data);
 
       if (!response.ok) {
         const errorMessage =
@@ -64,10 +50,7 @@ export const useYouTubeVideo = (videoId?: string): UseYouTubeVideoResult => {
           `API error: ${response.status} - ${
             response.statusText || "Nieznany błąd"
           }`;
-        console.error(
-          `[useYouTubeVideo] Błąd z backendu (status ${response.status}):`,
-          errorMessage
-        );
+
         throw new Error(errorMessage);
       }
 
@@ -90,20 +73,13 @@ export const useYouTubeVideo = (videoId?: string): UseYouTubeVideoResult => {
           fetchedVideo.streamUrl = SINTEL_STREAM_URL;
         }
         setVideo(fetchedVideo);
-        console.log(
-          `[useYouTubeVideo] Pomyślnie załadowano wideo: ${fetchedVideo.snippet.title}`
-        );
       } else {
         setError(
           "Wideo nie znaleziono w API lub odpowiedź API była pusta (brak 'items')."
         );
         setVideo(null);
-        console.warn(
-          `[useYouTubeVideo] Wideo o ID '${videoId}' nie znaleziono w danych API.`
-        );
       }
     } catch (err: any) {
-      console.error("[useYouTubeVideo] Wyłapano błąd w bloku catch:", err);
       setError(
         err.message ||
           "Wystąpił nieznany błąd podczas pobierania szczegółów wideo."
@@ -111,7 +87,6 @@ export const useYouTubeVideo = (videoId?: string): UseYouTubeVideoResult => {
       setVideo(null);
     } finally {
       setLoading(false);
-      console.log("[useYouTubeVideo] Zakończono ładowanie.");
     }
   }, [videoId]);
 

@@ -19,6 +19,7 @@ export interface YouTubeVideo {
   snippet: {
     title: string;
     channelTitle: string;
+    channelId?: string;
     thumbnails: {
       default: {
         url: string;
@@ -41,6 +42,7 @@ export interface YouTubeVideo {
     views?: number;
     likes?: number;
   };
+
   streamUrl?: string;
   statistics?: {
     viewCount: string;

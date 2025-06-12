@@ -27,6 +27,7 @@ export const mockYouTubeVideos: YouTubeVideo[] = [
       description: "Krótkometrażowy film animowany Sintel, demo HLS.",
       views: 15434,
       likes: 1202,
+      channelId: "",
     },
     streamUrl:
       "https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
@@ -58,6 +59,7 @@ export const mockYouTubeVideos: YouTubeVideo[] = [
         "Complete guide to building mobile apps with React Native in 2024",
       views: 254,
       likes: 180,
+      channelId: "",
     },
   },
   {
@@ -86,6 +88,7 @@ export const mockYouTubeVideos: YouTubeVideo[] = [
       description: "Learn the best practices for TypeScript development",
       views: 2301,
       likes: 450,
+      channelId: "",
     },
   },
   {
@@ -114,6 +117,7 @@ export const mockYouTubeVideos: YouTubeVideo[] = [
       description: "Deep dive into React Hooks and custom hook creation",
       views: 24023,
       likes: 2220,
+      channelId: "",
     },
   },
   {
@@ -142,6 +146,7 @@ export const mockYouTubeVideos: YouTubeVideo[] = [
       description: "Master state management with Redux Toolkit in React apps",
       views: 744550,
       likes: 77770,
+      channelId: "",
     },
   },
   {
@@ -171,6 +176,7 @@ export const mockYouTubeVideos: YouTubeVideo[] = [
         "Learn essential UI design principles for mobile applications",
       views: 12340,
       likes: 10,
+      channelId: "",
     },
   },
   {
@@ -199,6 +205,7 @@ export const mockYouTubeVideos: YouTubeVideo[] = [
       description: "Complete guide to integrating REST APIs in React Native",
       views: 123450,
       likes: 540,
+      channelId: "",
     },
   },
   {
@@ -227,6 +234,7 @@ export const mockYouTubeVideos: YouTubeVideo[] = [
       description: "Advanced navigation patterns in React Native applications",
       views: 450,
       likes: 120,
+      channelId: "",
     },
   },
   {
@@ -256,6 +264,7 @@ export const mockYouTubeVideos: YouTubeVideo[] = [
         "Tips and tricks for optimizing React application performance",
       views: 12345670,
       likes: 450,
+      channelId: "",
     },
   },
   {
@@ -284,6 +293,7 @@ export const mockYouTubeVideos: YouTubeVideo[] = [
       description: "Exploring latest JavaScript features and best practices",
       views: 345670,
       likes: 3420,
+      channelId: "",
     },
   },
   {
@@ -312,6 +322,7 @@ export const mockYouTubeVideos: YouTubeVideo[] = [
       description: "Master unit testing in your React Native applications",
       views: 1234567890,
       likes: 3455670,
+      channelId: "",
     },
   },
 ];

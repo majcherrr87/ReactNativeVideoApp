@@ -13,7 +13,6 @@ const Details = ({ video }: VideoTabsProps) => {
     <View style={styles.container}>
       <ScrollView
         style={styles.scrollView}
-        // contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         <Text style={styles.descriptionTitle}>Description</Text>
@@ -29,15 +28,12 @@ const Details = ({ video }: VideoTabsProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // <-- najważniejsze!
-    // backgroundColor: "#fff",
+    flex: 1,
   },
   scrollView: {
-    flex: 1, // <-- zajmuje całą dostępną przestrzeń nad Statistics
+    flex: 1,
   },
-  scrollContent: {
-    // padding: 16,
-  },
+
   descriptionTitle: {
     fontSize: 10,
     fontWeight: "bold",

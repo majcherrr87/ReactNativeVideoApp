@@ -31,9 +31,9 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   avatarContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 48,
+    height: 48,
+    borderRadius: "50%",
     backgroundColor: mainColor,
     justifyContent: "center",
     alignItems: "center",
