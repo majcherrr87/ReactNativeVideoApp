@@ -20,6 +20,7 @@ export interface YouTubeVideo {
     title: string;
     channelTitle: string;
     channelId?: string;
+    liveBroadcastContent: string;
     thumbnails: {
       default: {
         url: string;
@@ -42,11 +43,15 @@ export interface YouTubeVideo {
     views?: number;
     likes?: number;
   };
-
   streamUrl?: string;
   statistics?: {
     viewCount: string;
     likeCount: string;
+  };
+  status?: {
+    embeddable: boolean;
+    privacyStatus: string;
+    uploadStatus: string;
   };
 }
 
