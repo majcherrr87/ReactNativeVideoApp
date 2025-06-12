@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "AdrianMajcher-VideoApp",
+    "name": "YouTube Learn App",
     "slug": "ReactNativeVideoApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/newLogo.png",
     "scheme": "reactnativevideoapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/newLogo.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
@@ -50,6 +50,7 @@
       }
     ],
     "extra": {
+      "author": "Adrian Majcher",
       "router": {},
       "eas": {
         "projectId": "78d38df0-6678-4571-9b84-fd886fe8b1a9"
